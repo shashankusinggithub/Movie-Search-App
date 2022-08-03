@@ -26,7 +26,7 @@ const PlaylistPage = () => {
     useEffect(() => {
 
         axios.get("/selfplaylist/movieslist", { headers }).then((response) => {
-            console.log("playlist rendered")
+            console.log("playlist rendered", response.data)
             setMovies(response.data);
             // console.log(response.data);
         })
@@ -47,12 +47,13 @@ const PlaylistPage = () => {
 
 
     const Privatebody = (props) => {
-        const [privt, setPrivt] = useState(props.private)
+        // const [privt, setPrivt] = useState(props.private)
 
         const privatefun = async (playid, status) => {
-            setPrivt(!status);
+            // setPrivt(!status);
 
             await axios.put('./selfplaylist/private', { playlistid: playid, private: status })
+            console.log("pvt changed", props.private)
             setTrigger((prv) => (!prv))
         }
         // setPlaylistid(response.data.id);
@@ -71,10 +72,10 @@ const PlaylistPage = () => {
                 
                 <div>
                 <button className={styles.white_btn} onClick={() => deleteplaylist(props.id)} >Delete</button>
-                <button className={styles.white_btn} onClick={() => privatefun(props.id, privt)} >
+                <button className={styles.white_btn} onClick={() => privatefun(props.id, props.private)} >
 
-                    {privt ? 'Public' : "Private"} </button>
-                {!privt &&
+                    {props.private ? 'Public' : "Private"} </button>
+                {!props.private  &&
                     <button className={styles.copy_button} onClick={() => copy(window.location.origin + `/playlistuser/` + props.id)}>CLICK TO COPY LINK</button>
                 }
                 </div>
