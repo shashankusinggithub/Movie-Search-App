@@ -19,7 +19,8 @@ const Dashboard = () => {
     useEffect(() => {
         axios.get('/userplaylist/' + params).then((response) => {
             setDetails(response.data.playlist);
-            setTitle(response.data.user)
+            console.log(response)
+            setTitle(response.data.name)
         });
     }, []);
 

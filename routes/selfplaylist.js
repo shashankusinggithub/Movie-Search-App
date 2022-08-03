@@ -83,7 +83,7 @@ router.post("/delplaylist", protect, async (req, res) => {
     // // Deleting playlist
     const playlistname = await Playlist.findByIdAndRemove(req.body.playlistid)
     console.log(playlistname)
-    
+
     
     // delteting list from ueer playlists array
     await User.findByIdAndUpdate(req.user.id,{
@@ -102,6 +102,7 @@ router.put("/private", async (req, res) => {
         const toggle = !req.body.private
         await Playlist.findByIdAndUpdate(req.body.playlistid , { private: toggle }
             )     
+            console.log()
         res.status(200).send({msg: " playlist PRIVACY CHANGED"})
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" });

@@ -6,6 +6,7 @@ router.get("/:id", fletch,   async (req, res ) => {
 	try {
 		if (!req.playlist){
 			return res.status(401).send({ message: "Invalid UserID" });}
+			console.log(req.playlist)
 		
 			const details = {
 				name: req.playlist.name,
