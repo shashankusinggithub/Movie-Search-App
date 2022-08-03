@@ -84,6 +84,7 @@ router.post("/delplaylist", protect, async (req, res) => {
     const playlistname = await Playlist.findByIdAndRemove(req.body.playlistid)
     console.log(playlistname)
     
+    
     // delteting list from ueer playlists array
     await User.findByIdAndUpdate(req.user.id,{
         $pull: { playlists: {value:playlistname.id, label: playlistname.name } }
